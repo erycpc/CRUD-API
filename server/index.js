@@ -1,6 +1,7 @@
 const express = require('express')
 
 const app = express()
+app.use(express.json())
 
 const tasks = [
   { id: 1, title: 'Task 1', done: false },
@@ -21,6 +22,20 @@ app.get('/tasks/:id', (req, res) => {
   } else {
     res.status(404).json({ "error": `${taskId} not found` })
   }
+})
+
+app.post('/tasks', (req, res) => {
+  if (!req.body.title) {
+    return res.status(400).json({ "error": "Title is required" })
+  }
+  const newTask = {
+    id: tasks.length + 1,
+    title: req.body.title,
+    done: false
+  }
+  
+  tasks.push(newTask)
+  res.status(201).json(newTask)
 })
 
 app.get('/', (req, res) => {
