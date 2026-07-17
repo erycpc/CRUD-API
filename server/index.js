@@ -38,6 +38,33 @@ app.post('/tasks', (req, res) => {
   res.status(201).json(newTask)
 })
 
+app.put('/tasks/:id', (req, res) => {
+  const taskId = parseInt(req.params.id)
+  const task = tasks.find(t => t.id === taskId)
+
+  if (!req.body.title || typeof req.body.done !== 'boolean') {
+  return res.status(400).json({ "error": "Title and done are required" })
+  }
+  if (!task) {
+  return res.status(404).json({ "error": `${taskId} not found` })
+  }
+  task.title = req.body.title
+  task.done = req.body.done
+  res.status(200).json(task)
+})
+
+app.delete('/tasks/:id', (req, res) => {
+  const taskId = parseInt(req.params.id)
+  const taskIndex = tasks.findIndex(t => t.id === taskId)
+
+  if (taskIndex !== -1) {
+    tasks.splice(taskIndex, 1)
+    res.status(204).send()
+  } else {
+    res.status(404).json({ "error": `${taskId} not found` })
+  }
+})
+
 app.get('/', (req, res) => {
   res.status(200).json({ "name": "Task API", "version": "1.0", "endpoints": ["/tasks"] })
 })
