@@ -29,7 +29,7 @@ app.post('/tasks', (req, res) => {
     return res.status(400).json({ "error": "Title is required" })
   }
   const newTask = {
-    id: tasks.length + 1,
+    id: tasks.map(t => t.id).reduce((maxId, id) => Math.max(maxId, id), 0) + 1,
     title: req.body.title,
     done: false
   }
