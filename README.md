@@ -42,7 +42,7 @@ Content-Type: application/json; charset=utf-8
 
 Interactive API docs are available at `http://localhost:3000/docs`, generated from `openapi.json`. Full CRUD cycle (create, list, update, delete) can be tested directly from the "Try it out" button on each endpoint.
 
-![Swagger UI screenshot](![Swagger UI screenshot](./assets/swagger-screenshot.png)
+![Swagger UI screenshot](![Swagger UI screenshot](./assets/Screenshot(162).png)
 
 *(Screenshot: all 5 endpoints listed under `/tasks` and `/tasks/{id}`, grouped by method — GET, POST, PUT, DELETE.)*
 
